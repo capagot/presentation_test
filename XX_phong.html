@@ -1,0 +1,235 @@
+<!-- https://threejsfundamentals.org/threejs/lessons/threejs-load-obj.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Introduction to Computer Graphics</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+    <style>
+        #image_label {
+            position: fixed;
+            left: 10px; 
+            top: 650px;            
+            font-size: 14px;
+            border: 0px;
+            color: rgba(0, 255, 0, 1);
+            opacity: 0.75;
+            background-color: rgba(0, 0, 0, 1);
+        }        
+
+
+        .container{
+            display: flex;
+        }
+        .col{
+            flex: 1;
+        }
+
+        #c {
+            position: relative;
+            border: 0px solid red;
+            outline: none;
+        }
+
+        body {
+            font-family: "Computer Modern Sans", sans-serif;
+        }        
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/css/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/css/theme/black.css">
+    <link rel="stylesheet" href="css/my_theme.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h2>Loading Model</h2>
+                <span class="fragment fade-in" data-fragment-index="1">
+                    <canvas id="c" style="width:800px; height:550px; background-color: green;"></canvas>
+                </span>
+                <script type="module">
+                    import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js';
+                    import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/OrbitControls.js';
+                    import {OBJLoader2} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/OBJLoader2.js';
+
+                    function main() {
+                      const canvas = document.querySelector('#c');
+                      const renderer = new THREE.WebGLRenderer({canvas});
+
+                      const fov = 45;
+                      const aspect = 2;  // the canvas default
+                      const near = 1;
+                      const far = 100;
+                      const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+                      camera.position.set(0, 0, 10);
+
+                      const controls = new OrbitControls(camera, canvas);
+                      controls.target.set(0, 0, 0);
+                      controls.update();
+
+                      const scene = new THREE.Scene();
+                      scene.background = new THREE.Color('black');
+
+                      {
+                        const skyColor = 0xB1E1FF;  // light blue
+                        const groundColor = 0xB97A20;  // brownish orange
+                        const intensity = 1;
+                        const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+                        scene.add(light);
+                      }
+
+                      {
+                        const color = 0xFFFFFF;
+                        const intensity = 1;
+                        const light = new THREE.DirectionalLight(color, intensity);
+                        light.position.set(0, 10, 0);
+                        light.target.position.set(-5, 0, 0);
+                        scene.add(light);
+                        scene.add(light.target);
+                      }
+
+                      {
+                        const objLoader = new OBJLoader2();
+                        objLoader.load('http://localhost:8000/images_02/monkey.obj', (root) => {
+                          scene.add(root);
+                        });
+                      }
+
+                      function resizeRendererToDisplaySize(renderer) {
+                        const canvas = renderer.domElement;
+                        const width = canvas.clientWidth * 2;
+                        const height = canvas.clientHeight * 2;
+                        const needResize = canvas.width !== width || canvas.height !== height;
+                        if (needResize) {
+                          renderer.setSize(width, height, false);
+                        }
+                        return needResize;
+                      }
+
+                      function render() {
+                        if (resizeRendererToDisplaySize(renderer)) {
+                          const canvas = renderer.domElement;
+                          camera.aspect = canvas.clientWidth / canvas.clientHeight;
+                          camera.updateProjectionMatrix();
+                        }
+
+                        renderer.render(scene, camera);
+                        requestAnimationFrame(render);
+                      }
+
+                      requestAnimationFrame(render);
+                    }
+
+                    main();
+
+                </script>
+            </section>
+
+            <section>
+                <h2>Ambient Lighting Model</h2><br>
+
+                $I = I_a \times \kappa_a$
+
+                <div style="position:relative; width:800px; height:600px; margin:0 auto;">
+                    <span class="fragment fade-in" data-fragment-index="1">
+                        <img src="images_02/ia.svg" style="position:absolute;top:70px;left:35%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="2">
+                        <img src="images_02/kappa_a.svg" style="position:absolute;top:70px;left:35%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="3">
+                        <img src="images_02/i.svg" style="position:absolute;top:70px;left:35%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="4">
+                        <img src="images_02/product.svg" style="position:absolute;top:70px;left:35%;">
+                    </span>
+                </div>
+
+            </section>
+
+            <section>
+                <h2>Introduction to Computer Graphics</h2>
+
+                <div style="position:relative; width:800px; height:600px; margin:0 auto;">
+                    <span class="fragment fade-in" data-fragment-index="1">
+                        <img src="images/p_1.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="2">
+                        <img src="images/p_2.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="3">
+                        <span class="fragment fade-out" data-fragment-index="6">
+                            <img src="images/p_3.svg" style="position:absolute;top:0px;left:15%;">
+                        </span>
+                    </span>
+
+                    <span class="fragment fade-in" data-fragment-index="4">
+                        <img src="images/p_4.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="5">
+                        <img src="images/p_5.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="7">
+                        <img src="images/p_6.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/headjs@1.0.3/dist/1.0.0/head.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/js/reveal.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mathjs@7.0.1/dist/math.min.js"></script> -->
+
+    <script>
+        Reveal.initialize({
+            history: false,
+            transition: 'fade',
+            slideNumber: true,
+            //minScale: 1,
+            //maxScale: 1,
+            dependencies: [
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/markdown/marked.js' },
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/markdown/markdown.js' },
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/notes/notes.js', async: true },
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/math/math.js', async: true},
+                //{ src: '//cdn.socket.io/socket.io-1.3.5.js', async: true },
+                //{ src: 'plugin/multiplex/master.js', async: true },
+                // and if you want speaker notes
+                //{ src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/notes-server/client.js', async: true }
+
+            ],
+
+                math: {
+                    mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+                 config: 'TeX-AMS_HTML-full'
+                },
+
+            // math: {
+            //     mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+            //     config: 'TeX-AMS_HTML-full',
+            //     // pass other options into `MathJax.Hub.Config()`
+            //     TeX: { Macros: { RR: "{\\bf R}" } }
+            // },
+            //plugins: [ RevealMath ]
+        
+        });
+    </script>
+
+</body>
+
+</html>

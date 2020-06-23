@@ -19,12 +19,20 @@
             color: rgba(0, 255, 0, 1);
             opacity: 0.75;
             background-color: rgba(0, 0, 0, 1);
-            backgroun
         }        
+
+
+        .container{
+            display: flex;
+        }
+        .col{
+            flex: 1;
+        }
+
 
         body {
             font-family: "Computer Modern Sans", sans-serif;
-        }
+        }        
     </style>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/css/reveal.css">
@@ -39,18 +47,99 @@
 
     <div class="reveal">
         <div class="slides">
-
+            <!--
             <section>
                 <h2>Introduction to Computer Graphics</h2>
                 <img src="images/box.jpg" height="300" width="300" border="0">
                 <p><small>Christian A. Pagot</small></p>
             </section>
+            -->
+            <section>
+                <h2>Rasterizing Lines</h2><br>
+
+                <div class="container">
+                    <div class="col">
+                        <div style="position:relative; width:600px; height:600px; margin:0 auto;">
+                            <span class="fragment fade-in" data-fragment-index="1">
+                                <img src="images/raster_line/ref_coord.svg" style="position:absolute;top:0px;left:0%;">
+                            </span>
+                            <span class="fragment fade-in" data-fragment-index="2">
+                                <span class="fragment fade-out" data-fragment-index="4">
+                                    <img src="images/raster_line/pixel_area.svg" style="position:absolute;top:0px;left:0%;">
+                                </span>
+                            </span>
+                            <span class="fragment fade-in" data-fragment-index="3">
+                                <img src="images/raster_line/pixel_centers.svg" style="z-index: 5; position:absolute;top:0px;left:0%;">
+                            </span>
+                            <span class="fragment fade-in" data-fragment-index="5">
+                                <img src="images/raster_line/grid_lines.svg" style="z-index: 2; position:absolute;top:0px;left:0%;">
+                            </span>
+                            <span class="fragment fade-in" data-fragment-index="6">
+                                <span class="fragment fade-out" data-fragment-index="18">                        
+                                    <img src="images/raster_line/math_line.svg" style="z-index: 10; position:absolute;top:0px;left:0%;">
+                                </span>
+                            </span>
+                            <span class="fragment fade-in" data-fragment-index="7">
+                                <span class="fragment fade-out" data-fragment-index="18">
+                                    <img src="images/raster_line/deltas_x_y.svg" style="position:absolute;top:0px;left:0%;">
+                                </span>
+                            </span>
+                            <span class="fragment fade-in" data-fragment-index="16">
+                                <span class="fragment fade-out" data-fragment-index="17">
+                                    <img src="images/raster_line/cont_raster.svg" style="position:absolute;top:0px;left:0%;">
+                                </span>
+                            </span>
+                            <span class="fragment fade-in" data-fragment-index="17">
+                                <img src="images/raster_line/discr_raster.svg" style="position:absolute;top:0px;left:0%;">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div style="position:relative; width:370px; height:300px; margin:0 auto;">
+
+                            <p class="fragment fade-in" data-fragment-index="8" style="font-size: 20px; text-align: left;">Angular coefficient of the line:</p>
+                            <p class="fragment fade-in" data-fragment-index="9" style="font-size: 20px; ">\(\color{yellow}{m}=\frac{\color{green}{\Delta y}}{\color{orange}{\Delta x}}\)</p>
+                            <p class="fragment fade-in" data-fragment-index="8" style="font-size: 20px; text-align: left;">Line equation in the slope-intersection form:</p>
+                            <p class="fragment fade-in" data-fragment-index="10" style="font-size: 20px; ">\(y_i = \color{yellow}{m} x_i + b\)</p>
+                            <p class="fragment fade-in" data-fragment-index="11" style="font-size: 20px; text-align: left;">Now we can find \(y\) by incrementing \(x\):</p>
+                            <p class="fragment fade-in" data-fragment-index="12" style="font-size: 20px; text-align: left;"> - 1st point: (\(x_0\),\(m x_0 + b \))</p>
+                            <p class="fragment fade-in" data-fragment-index="13" style="font-size: 20px; text-align: left;"> - 2nd point: (\(x_1\),\(m x_1 + b \)), \(x_1=x_0+1\)</p>
+                            <p class="fragment fade-in" data-fragment-index="14" style="font-size: 20px; text-align: left;"> - 3rd point: (\(x_2\),\(m x_2 + b \)), \(x_2=x_1+1\)</p>
+                            <p class="fragment fade-in" data-fragment-index="15" style="font-size: 20px; ">...</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
 
             <section>
-                <div data-svg-fragment="images/test.svg#[*|label=layer_1]">
-                  <a class="fragment" href="[*|label=layer_2]"></a>
-                  <a class="fragment" href="[*|label=layer_3]"></a>
-                </div>        
+                <h2>Introduction to Computer Graphics</h2>
+
+                <div style="position:relative; width:800px; height:600px; margin:0 auto;">
+                    <span class="fragment fade-in" data-fragment-index="1">
+                        <img src="images/p_1.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="2">
+                        <img src="images/p_2.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="3">
+                        <span class="fragment fade-out" data-fragment-index="6">
+                            <img src="images/p_3.svg" style="position:absolute;top:0px;left:15%;">
+                        </span>
+                    </span>
+
+                    <span class="fragment fade-in" data-fragment-index="4">
+                        <img src="images/p_4.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="5">
+                        <img src="images/p_5.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                    <span class="fragment fade-in" data-fragment-index="7">
+                        <img src="images/p_6.svg" style="position:absolute;top:0px;left:15%;">
+                    </span>
+                </div>
             </section>
 
             <section>
@@ -225,6 +314,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/headjs@1.0.3/dist/1.0.0/head.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/js/reveal.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mathjs@7.0.1/dist/math.min.js"></script> -->
 
     <script>
         Reveal.initialize({
@@ -233,18 +323,31 @@
             slideNumber: true,
             //minScale: 1,
             //maxScale: 1,
-
             dependencies: [
                 { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/markdown/marked.js' },
                 { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/markdown/markdown.js' },
                 { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/notes/notes.js', async: true },
                 { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/math/math.js', async: true},
                 //{ src: '//cdn.socket.io/socket.io-1.3.5.js', async: true },
                 //{ src: 'plugin/multiplex/master.js', async: true },
                 // and if you want speaker notes
                 //{ src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/plugin/notes-server/client.js', async: true }
 
             ],
+
+                math: {
+                    mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+                 config: 'TeX-AMS_HTML-full'
+                },
+
+            // math: {
+            //     mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+            //     config: 'TeX-AMS_HTML-full',
+            //     // pass other options into `MathJax.Hub.Config()`
+            //     TeX: { Macros: { RR: "{\\bf R}" } }
+            // },
+            //plugins: [ RevealMath ]
         
         });
     </script>

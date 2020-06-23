@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="this_class_diagram.svg"
+   sodipodi:docname="this_class_diagram_4.svg"
    inkscape:export-filename="/home/christian/Dropbox/work/github_workspace/presentation_test/images/this_class_diagram.png"
    inkscape:export-xdpi="299.95557"
    inkscape:export-ydpi="299.95557">
@@ -136,7 +136,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
+     inkscape:zoom="1.4"
      inkscape:cx="251.03644"
      inkscape:cy="147.83393"
      inkscape:document-units="mm"
@@ -160,7 +160,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -284,7 +284,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="img processing"
-     style="display:inline">
+     style="display:none">
     <path
        style="display:inline;fill:none;fill-opacity:1;stroke:#858585;stroke-width:0.66500002;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker2117)"
        id="path2107"
